@@ -1,66 +1,65 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   return (
-    <>
-      <header class="header-section">
-        <div class="container-fluid">
-          <div class="inner-header">
-            <div class="logo">
-              <a href="./index.html">
-                <img src="./src/img/logo.png" alt="" />
-              </a>
-            </div>
-            <div class="header-right">
-              <img src="./src/img/icons/search.png" alt="" class="search-trigger" />
-              <img src="./src/img/icons/man.png" alt="" />
-              <a href="#">
-                <img src="./src/img/icons/bag.png" alt="" />
-                <span>2</span>
-              </a>
-            </div>
-            <div class="user-access">
-              <a href="#">Register</a>
-              <a href="#" class="in">
-                Sign in
-              </a>
-            </div>
-            <nav class="main-menu mobile-menu">
-              <ul>
-                <li>
-                  <a class="active" href="./index.html">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="./categories.html">Shop</a>
-                  <ul class="sub-menu">
-                    <li>
-                      <a href="product-page.html">Product Page</a>
-                    </li>
-                    <li>
-                      <a href="shopping-cart.html">Shopping Card</a>
-                    </li>
-                    <li>
-                      <a href="check-out.html">Check out</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="./product-page.html">About</a>
-                </li>
-                <li>
-                  <a href="./check-out.html">Blog</a>
-                </li>
-                <li>
-                  <a href="./contact.html">Contact</a>
-                </li>
-              </ul>
-            </nav>
+    <header className="header-section">
+      <div className="container-fluid">
+        <div className="inner-header">
+          <div className="logo">
+            <Link to="/">
+              <img src="./src/img/logo.png" alt="Logo" />
+            </Link>
           </div>
+          <div className="header-right">
+            <img src="./src/img/icons/search.png" alt="Search" className="search-trigger" />
+            <img src="./src/img/icons/man.png" alt="User" />
+            <Link to="#">
+              <img src="./src/img/icons/bag.png" alt="Bag" />
+              <span>2</span>
+            </Link>
+          </div>
+          <div className="user-access">
+            <Link to="#">Register</Link>
+            <Link to="#" className="in">
+              Sign in
+            </Link>
+          </div>
+          <nav className="main-menu mobile-menu">
+            <ul>
+              <li>
+                <Link className="active" to="/">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/shop">Shop</Link>
+                <ul className="sub-menu">
+                  <li>
+                    <Link to="/product-page">Product Page</Link>
+                  </li>
+                  <li>
+                    <Link to="/shopping-cart">Shopping Cart</Link>
+                  </li>
+                  <li>
+                    <Link to="/check-out">Check out</Link>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+              <li>
+                <Link to="/check-out">Blog</Link>
+              </li>
+              <li>
+                <Link to="/contact">Contact</Link>
+              </li>
+            </ul>
+          </nav>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 };
 
