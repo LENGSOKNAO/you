@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
+  const [cartItems, setCartItems] = useState([]);
+
+  // Get cart items from localStorage
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItems(cart);
+  }, []);
+
+  // Calculate total quantity of items in the cart
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <header className="header-section">
       <div className="container-fluid">
@@ -12,11 +22,15 @@ const Nav = () => {
             </Link>
           </div>
           <div className="header-right">
-            <img src="./src/img/icons/search.png" alt="Search" className="search-trigger" />
+            <img
+              src="./src/img/icons/search.png"
+              alt="Search"
+              className="search-trigger"
+            />
             <img src="./src/img/icons/man.png" alt="User" />
-            <Link to="#">
+            <Link to="/cart">
               <img src="./src/img/icons/bag.png" alt="Bag" />
-              <span>2</span>
+              <span>{totalItems}</span>
             </Link>
           </div>
           <div className="user-access">
@@ -34,24 +48,11 @@ const Nav = () => {
               </li>
               <li>
                 <Link to="/shop">Shop</Link>
-                <ul className="sub-menu">
-                  <li>
-                    <Link to="/product-page">Product Page</Link>
-                  </li>
-                  <li>
-                    <Link to="/shopping-cart">Shopping Cart</Link>
-                  </li>
-                  <li>
-                    <Link to="/check-out">Check out</Link>
-                  </li>
-                </ul>
               </li>
               <li>
                 <Link to="/about">About</Link>
               </li>
-              <li>
-                <Link to="/check-out">Blog</Link>
-              </li>
+
               <li>
                 <Link to="/contact">Contact</Link>
               </li>

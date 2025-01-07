@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const Api = () => {
   const [products, setProducts] = useState([]);
@@ -7,15 +8,16 @@ const Api = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
+  const navigate = useNavigate(); // Initialize navigation
 
   useEffect(() => {
     // Fetch products from API
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://fakestoreapi.com/products"); // Replace with actual API endpoint
+        const response = await axios.get("https://fakestoreapi.com/products");
         setProducts(response.data);
         setFilteredProducts(response.data);
-        // Extract categories dynamically if available
+        // Extract categories dynamically
         const productCategories = [
           ...new Set(response.data.map((product) => product.category)),
           "All",
@@ -41,6 +43,10 @@ const Api = () => {
       );
       setFilteredProducts(filtered);
     }
+  };
+
+  const handleGoToCart = () => {
+    navigate("/cart");
   };
 
   if (loading) return <h2>Loading...</h2>;
@@ -83,9 +89,9 @@ const Api = () => {
             >
               <div className="single-product-item">
                 <figure>
-                  <a href="#">
+                  <Link to={`/page/${product.id}`}>
                     <img src={product.image} alt={product.title} />
-                  </a>
+                  </Link>
                   <div className="p-status">
                     {product.rating.rate >= 4 ? "popular" : "new"}
                   </div>
@@ -93,6 +99,9 @@ const Api = () => {
                 <div className="product-text">
                   <h6>{product.title}</h6>
                   <p>${product.price}</p>
+                  <button className="site-btn" onClick={() => handleGoToCart()}>
+                    Go to Cart
+                  </button>
                 </div>
               </div>
             </div>
